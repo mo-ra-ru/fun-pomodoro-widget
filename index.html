@@ -201,19 +201,25 @@
                 `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
         }
         
+        
         function updateCharacterState() {
             const img = document.getElementById('characterImg');
-            
+
+            // When paused: reflect the selected mode (not always idle)
             if (!isRunning) {
-                img.src = characterImages.idle;
-            } else if (currentMode === 'pomodoro') {
-                img.src = characterImages.working;
-            } else if (currentMode === 'short') {
-                img.src = characterImages.shortBreak;
-            } else if (currentMode === 'long') {
-                img.src = characterImages.longBreak;
+              if (currentMode === 'short') img.src = characterImages.shortBreak;
+              else if (currentMode === 'long') img.src = characterImages.longBreak;
+              else if (currentMode === 'pomodoro') img.src = characterImages.working;
+              else img.src = characterImages.idle; 
+              return;
             }
-        }
+        
+            // When running: reflect the active mode
+            if (currentMode === 'pomodoro') img.src = characterImages.working;
+            else if (currentMode === 'short') img.src = characterImages.shortBreak;
+            else img.src = characterImages.longBreak;
+        }           
+
         
         function toggleTimer() {
             isRunning = !isRunning;
@@ -300,6 +306,8 @@
                     body: 'Session complete! Time for a break.'
                 });
             }
+            
+
             
             timeLeft = modes[currentMode].duration;
             updateDisplay();
