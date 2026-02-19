@@ -148,13 +148,16 @@
           bottom: 24px;
           right: 24px;
           z-index: 999;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
         }
         
         .bmc-btn {
           display: flex;
           align-items: center;
           gap: 10px;
-          background: #FF6EC7; /* magenta-pink to match your app */
+          background: #FF6EC7;
           color: #1a1a1a;
           font-family: inherit;
           font-weight: 700;
@@ -166,6 +169,8 @@
           box-shadow: 4px 4px 0px #1a1a1a;
           transition: transform 0.1s ease, box-shadow 0.1s ease;
           white-space: nowrap;
+          overflow: visible; /* allows image to overflow */
+          position: relative;
         }
         
         .bmc-btn:hover {
@@ -178,8 +183,23 @@
           box-shadow: 2px 2px 0px #1a1a1a;
         }
         
-        .bmc-emoji {
-          font-size: 20px;
+        .bmc-img {
+          width: 70px;        /* oversized — adjust to taste */
+          height: 70px;
+          object-fit: contain;
+          margin-left: -10px;
+          margin-bottom: -20px; /* makes it "pop out" below the button */
+          position: relative;
+          z-index: 1;
+        }
+        
+        .bmc-tagline {
+          margin-top: 6px;
+          font-size: 12px;
+          font-weight: 600;
+          text-align: center;
+          color: #1a1a1a;
+          line-height: 1.5;
         }
     </style>
 </head>
@@ -209,9 +229,10 @@
         <!-- ☕ Buy Me a Coffee Button -->
         <div class="bmc-wrapper">
           <a href="https://buy.stripe.com/aFa3cu9261M1fXp3sZfEk00" target="_blank" class="bmc-btn">
-            <span class="bmc-emoji">☕</span>
+            <img src="coffee-drawing.png" alt="coffee" class="bmc-img" />
             <span class="bmc-text">Buy me a coffee</span>
           </a>
+          <p class="bmc-tagline">Fuel the creative spiral<br>More espresso, less depresso</p>
         </div>
     </div>
 
